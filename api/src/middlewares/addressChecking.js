@@ -1,6 +1,6 @@
 import { core } from '@algonaut/algo-validation-agent/dist/algo-validation-agent.cjs';
 
-
+// validate address for transaction
 export const addressChecking = async (req, res, next) => {
     const {receiverAddr} = req.body
 

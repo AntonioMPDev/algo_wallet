@@ -2,6 +2,7 @@ import User from "../models/User";
 import jwt from "jsonwebtoken"
 import config from "../config";
 
+// signup user
 export const signup = async (req, res) => {
 
     const { username, email, password } = req.body
@@ -21,6 +22,7 @@ export const signup = async (req, res) => {
     res.status(200).json({newUser})
 }
 
+// login user
 export const signin = async (req, res) => {
     const { email, password } = req.body 
 
@@ -39,6 +41,7 @@ export const signin = async (req, res) => {
     res.json({ token })
 }
 
+// get current user authenticated
 export const getMe = async (req, res) => {
     const authorizationHeader = req.headers.authorization.split(" ")
     const decoded = jwt.decode(authorizationHeader[1], config.SECRET)

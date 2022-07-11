@@ -1,6 +1,6 @@
 import User from "../models/User"
 
-
+// check if email already exist
 export const checkDuplicateUsernameOrEmail = async (req, res, next) => {
     const username = await User.findOne({ username: req.body.username })
 

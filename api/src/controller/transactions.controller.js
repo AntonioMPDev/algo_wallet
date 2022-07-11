@@ -2,6 +2,7 @@ import Transaction from "../models/Transaction"
 import algosdk from "algosdk"
 import config from "../config"
 
+// public in blockchain the transaction and save in db
 export const makeTransaction = async (req, res) => {
     const {user, receiverAddr, amount} = req.body
 
@@ -81,6 +82,7 @@ export const makeTransaction = async (req, res) => {
     }
 }
 
+// get user transactions
 export const getTransactions = async (req, res) => {
 
     const transactions = await Transaction.find({ user: req.params.id }).sort({createdAt: -1})
