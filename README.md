@@ -1,2 +1,3 @@
-# react-typescript-node
-react-typescript-node
+# Node Mongodb | React-redux Typescript
+
+Algorand Wallet
