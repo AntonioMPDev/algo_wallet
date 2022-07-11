@@ -7,7 +7,7 @@ const initialState: {status:boolean} = {
     status: false
 };
 
-
+// slice to handle dialog status
 export const dialogSlice = createSlice({
   name: 'dialog',
   initialState,
@@ -29,8 +29,10 @@ export const dialogSlice = createSlice({
   },
 });
 
+// export dialog actions
 export const { open, close } = dialogSlice.actions;
 
+// export dialog store 
 export const selectDialog = (state: RootState) => state.dialog.status;
 
 export default dialogSlice.reducer;

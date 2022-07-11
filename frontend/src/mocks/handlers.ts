@@ -1,6 +1,7 @@
 import { rest } from "msw"
 
 export const handlers = [
+    // mock for testing
     rest.get(`${process.env.REACT_APP_API_DOMAIN}/api/transactions/user/62ca11a2d40190a289bdaa20`, (rq, res, ctx)=>{
         return res(
             ctx.status(200),

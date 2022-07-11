@@ -20,6 +20,7 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.REACT_APP_API_DOMAIN}/api`,
+    // header with token
     prepareHeaders: (headers) => {
       const token = new Storage().get("token") || "";
       if (token) {

@@ -15,20 +15,19 @@ type Inputs = {
 
 const Transfer = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-    const [transfer, {isLoading:transferIsloading,  error: transferError, isSuccess: transferSuccess}] = useTransferMutation()
+    const [transfer, {isLoading:transferIsloading,  error: transferError}] = useTransferMutation()
     const { data: me } = useGetMeQuery("");
-    // const [ dialogOpen, setDialogOpen ] = useState(false)
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch(); // handle dialog
     const dialogStatus = useAppSelector(selectDialog);
 
-
+    // handle sumitting form for transfer
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         const transferData = data
         transferData.user = me?._id
+        // call useTransferMutation
         transfer(transferData)
     };
     const transfError: any = transferError
-
 
     return (
         <>  
@@ -51,6 +50,7 @@ const Transfer = () => {
                             variant="standard"
                             {...register("receiverAddr", { required: true })} 
                         />
+                        {/* handle receiverAddr field error */}
                         {errors.receiverAddr && <span className={classes.dangerText}>This field is required</span>}
 
                         <TextField 
@@ -62,9 +62,11 @@ const Transfer = () => {
                             variant="standard"
                             {...register("amount", { required: "This field is required", min: 0, max: 10000 })} 
                         />
+                        {/* handle amount field errors */}
                         {errors.amount && <span className={classes.dangerText}>{errors.amount.message}</span>}
                         {(watch("amount") < 0) || (watch("amount") > 10000) ? (<span className={classes.dangerText}>Must be less than 10000</span>) : null }
 
+                        {/* show error if user typed an invalid address */}
                         {transfError?.status === 409 && <span className={classes.dangerText}>Invalid address</span>}
 
                     </DialogContent>

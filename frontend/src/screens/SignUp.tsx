@@ -20,10 +20,13 @@ const SignUp = () => {
     const password = watch("password")
     const [signUp, {isSuccess}] = useSignUpMutation();
 
+    // check if token exist in storage
     if(new Storage().get("token") != null) return <Navigate to="/" />
 
+    // onSuccess redirect to login page
     if(isSuccess) return <Navigate to="/login" replace />
 
+    // call useSignUpMutation
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         signUp(data)
     };
@@ -48,6 +51,7 @@ const SignUp = () => {
                             variant="standard"
                             {...register("username", { required: true })} 
                         />
+                        {/* handle username field errors */}
                         {errors.username && <span className={classes.dangerText}>This field is required</span>}
 
                         <TextField 
@@ -58,6 +62,7 @@ const SignUp = () => {
                             variant="standard"
                             {...register("email", { required: true })} 
                         />
+                        {/* handle email field errors */}
                         {errors.email && <span className={classes.dangerText}>This field is required</span>}
 
                         <TextField 
@@ -75,6 +80,7 @@ const SignUp = () => {
                                 }
                             })} 
                         />
+                        {/* handle password field errors */}
                         {errors.password && <span className={classes.dangerText}>{errors.password.message}</span>}
 
                         <TextField 
@@ -87,6 +93,7 @@ const SignUp = () => {
                                 validate: value => value === password || "The passwords do not match"
                             })} 
                         />
+                        {/* handle repeat_password field errors */}
                         {errors.repeat_password && <span className={classes.dangerText}>{errors.repeat_password.message}</span>}
 
                         <Button className={classes.buttonSubmit} variant="contained" type="submit" >Submit</Button>

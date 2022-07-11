@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import Storage from "../utils/storage";
 
+// handle logout
 const useLogout = () =>{
     const navigate = useNavigate()
     

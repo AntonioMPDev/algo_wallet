@@ -18,10 +18,13 @@ const Login = () => {
     const [login, {error, isSuccess}] = useLoginMutation();
     const restError: any = error
 
+    // check if token exist in storage
     if(new Storage().get("token") != null) return <Navigate to="/" />
 
+    // onSuccess redirect to dashboard page
     if(isSuccess) return <Navigate to="/" replace />
 
+    // call useLoginMutation
     const onSubmit: SubmitHandler<Inputs> = (data:Inputs) => {
         const email = data.email
         const password = data.password
@@ -48,6 +51,7 @@ const Login = () => {
                             variant="standard"
                             {...register("email", { required: true })} 
                         />
+                        {/* handle email field errors */}
                         {errors.email && <span className={classes.dangerText}>This field is required</span>}
 
                         <TextField 
@@ -65,12 +69,13 @@ const Login = () => {
                                 }
                             })} 
                         />
+                        {/* handle pasword field errors */}
                         {errors.password && <span className={classes.dangerText}>{errors.password.message}</span>}
-
+                        
+                        {/* handle res errors */}
                         {restError && <div className={classes.dangerText}>{restError.data.message}</div>}
 
-                        <Button className={classes.buttonSubmit} variant="contained" type="submit" >Submit</Button>
-                        
+                        <Button className={classes.buttonSubmit} variant="contained" type="submit"> Submit </Button>
                         
                         <div className={classes.signupLinks}>
                             <p>Don't have an account? <Link to="/signup">SignUp </Link></p>                   

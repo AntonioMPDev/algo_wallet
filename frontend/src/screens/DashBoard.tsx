@@ -10,12 +10,12 @@ import Transfer from "./Transfer";
 const Dashboard = () => {
     const { data } = useGetMeQuery("");
 
+    // if not data received show progress bar
     if(!data) return <CircularProgress /> 
 
     return (
         <>
             <Navbar />
-
             <Container className={classes.containerDashboard}>
                 <Paper elevation={0}>
                     <div className={classes.contentForm}>

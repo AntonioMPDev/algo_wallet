@@ -12,6 +12,7 @@ type Props = {
 const Transactions = ({_id}: Props) => {
     const { data } = useGetTransactionsQuery(_id);
     
+    // show progress bar if no data received
     if(!data) return <CircularProgress /> 
     
     return (
@@ -21,6 +22,7 @@ const Transactions = ({_id}: Props) => {
                 My Algorand Transactions
             </Typography>
             <div className={classes.chart}>
+              {/* chart of transfers */}
               <ChartTransfer data={data} />
             </div>
             <div style={{height: "50px"}}></div>
@@ -48,8 +50,6 @@ const Transactions = ({_id}: Props) => {
                 </div>
               ))}
             </List>
-
-
         </div>
   );
 }

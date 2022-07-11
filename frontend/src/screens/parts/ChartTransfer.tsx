@@ -13,6 +13,7 @@ import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 import { Transaction } from '../../model/models';
 
+// register chart
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -24,6 +25,7 @@ ChartJS.register(
     Legend
 );
 
+// options to use in chart
 export const options = {
     responsive: true,
     plugins: {
@@ -42,13 +44,12 @@ type Props = {
 }
 
 const ChartTransfer = ({data}: Props ) =>{
-
     const labels: string[] = [];
-    if(data.length > 0) data.map((w:any)=>{
-      labels.push(moment(w.createdAt).fromNow())
-      
-    })
 
+    // build labels array
+    if(data.length > 0) data.map((w:any) => labels.push(moment(w.createdAt).fromNow()))
+
+    // chart data
     const dataChart = {
         labels,
         datasets: [
